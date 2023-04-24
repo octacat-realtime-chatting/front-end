@@ -30,7 +30,7 @@ export default function Login() {
       <div className="flex items-center justify-center px-36 pb-28 h-full">
         <form className="flex flex-col gap-[25px] w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-[20px]">
-            <span className="text-[#393E46] text-3xl uppercase dm-mono font-medium">login</span>
+            <span className="text-[#393E46] text-3xl uppercase dm-mono font-medium">logiasdasdasdn</span>
             <div className="flex flex-col gap-[15px]">
               <div className="flex flex-col gap-[25px]">
                 <input
