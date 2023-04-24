@@ -1,7 +1,10 @@
 import React from 'react';
+import ContentLayout from '../layout/contentLayout';
 
 export default function Home() {
   return (
-    <div className="h-screen">index</div>
+    <ContentLayout>
+      asdfasdfasd
+    </ContentLayout>
   );
 }

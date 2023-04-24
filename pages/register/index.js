@@ -2,14 +2,16 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { BiLoaderCircle } from 'react-icons/bi';
 import AuthenticationLayout from '../layout/authenticationLayout';
-import { asyncRegister } from '../../redux/reducers/authSlices';
+import { asyncRegister, authState } from '../../redux/reducers/authSlices';
 import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
 
 export default function Register() {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
+  const { loadingAsyncLogin } = useSelector(authState);
 
   const {
     register, handleSubmit, formState: { errors }, reset,
@@ -34,7 +36,7 @@ export default function Register() {
 
   return (
     <AuthenticationLayout>
-      <div className="flex items-center justify-center px-36 pb-28 h-full">
+      <div className="flex items-center justify-center px-10 sm:px-36 pb-28 h-full">
         <form className="flex flex-col gap-[25px] w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-[20px]">
             <span className="text-[#393E46] text-3xl uppercase dm-mono font-medium">sign up</span>
@@ -94,7 +96,7 @@ export default function Register() {
             type="submit"
             className="bg-[#00ADB5] uppercase text-base font-semibold dm-sans text-[#EEEEEE] py-2 rounded-[10px] shadow-login"
           >
-            sign up
+            { loadingAsyncLogin ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'sign up' }
           </button>
         </form>
       </div>

@@ -14,11 +14,17 @@ const userServices = {
   login: async ({
     email, password,
   }) => {
-    const { data: { status, message, errors } } = await apiServices.post('/auth/login', {
+    const {
+      data: {
+        status, message, errors, data,
+      },
+    } = await apiServices.post('/auth/login', {
       email, password,
     });
 
-    return { status, message, errors };
+    return {
+      status, message, errors, data,
+    };
   },
 };
 

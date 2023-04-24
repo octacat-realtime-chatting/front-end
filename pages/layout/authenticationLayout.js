@@ -5,8 +5,8 @@ export default function AuthenticationLayout({ children }) {
   return (
     <>
       <ContainerToast />
-      <div className="grid grid-cols-2 min-h-screen max-h-screen">
-        <div className="col-span-1 bg-[#393E46] p-10 relative overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 min-h-screen max-h-screen">
+        <div className="hidden sm:hidden md:hidden lg:block lg:col-span-1 bg-[#393E46] p-10 relative overflow-hidden">
           <div className="flex flex-row items-center gap-3">
             <div className="h-7 w-7 rounded-full border-4 border-[#D6D8DA] flex items-center justify-center">
               <div className="bg-[#D6D8DA] h-3 w-3 rounded-full" />
