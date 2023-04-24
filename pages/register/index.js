@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import AuthenticationLayout from '../layout/authenticationLayout';
 import { asyncRegister } from '../../redux/reducers/authSlices';
+import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -19,7 +20,13 @@ export default function Register() {
 
     try {
       const response = await dispatch(asyncRegister(data));
-      console.log(response?.payload?.status);
+      if (response?.payload?.status) {
+        NotifToastBerhasil(response?.payload?.message);
+      }
+
+      if (!response?.payload?.status) {
+        NotifToastGagal(response?.error?.message);
+      }
     } catch (error) {
       throw new Error(error);
     }

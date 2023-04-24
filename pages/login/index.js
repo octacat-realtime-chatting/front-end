@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import { asyncLogin } from '../../redux/reducers/authSlices';
 import AuthenticationLayout from '../layout/authenticationLayout';
+import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
 
 export default function Login() {
   const dispatch = useDispatch();
+  const { push } = useRouter();
   const [visible, setVisible] = useState(false);
 
   const {
@@ -19,7 +22,17 @@ export default function Login() {
 
     try {
       const response = await dispatch(asyncLogin(data));
-      console.log(response?.payload?.status);
+      if (response?.payload?.status) {
+        NotifToastBerhasil(response?.payload?.message);
+
+        setTimeout(() => {
+          push('/home');
+        }, 3000);
+      }
+
+      if (!response?.payload?.status) {
+        NotifToastGagal(response?.error?.message);
+      }
     } catch (error) {
       throw new Error(error);
     }
