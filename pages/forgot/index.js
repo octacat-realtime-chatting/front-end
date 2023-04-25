@@ -55,10 +55,6 @@ export default function SendEmail() {
             </div>
           </div>
 
-          <Link href={`/forgot/password/${Paramcrypt.encode(123)}`}>
-            asdasd
-          </Link>
-
           <button
             type="submit"
             className="bg-[#00ADB5] uppercase text-base font-semibold dm-sans text-[#EEEEEE] py-2 rounded-[10px] shadow-login"
