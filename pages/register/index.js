@@ -11,7 +11,7 @@ import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
 export default function Register() {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const { loadingAsyncLogin } = useSelector(authState);
+  const { loadingAsyncRegister } = useSelector(authState);
 
   const {
     register, handleSubmit, formState: { errors }, reset,
@@ -96,7 +96,7 @@ export default function Register() {
             type="submit"
             className="bg-[#00ADB5] uppercase text-base font-semibold dm-sans text-[#EEEEEE] py-2 rounded-[10px] shadow-login"
           >
-            { loadingAsyncLogin ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'sign up' }
+            { loadingAsyncRegister ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'sign up' }
           </button>
         </form>
       </div>

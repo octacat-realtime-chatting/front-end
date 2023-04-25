@@ -26,6 +26,16 @@ const userServices = {
       status, message, errors, data,
     };
   },
+
+  sendEmail: async ({
+    email,
+  }) => {
+    const { data: { status, message, errors } } = await apiServices.post('/auth/forgotpwd', {
+      email,
+    });
+
+    return { status, message, errors };
+  },
 };
 
 export default userServices;

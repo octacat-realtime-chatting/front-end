@@ -24,7 +24,7 @@ export default function Login() {
 
     try {
       const response = await dispatch(asyncLogin(data));
-      console.log(response);
+
       if (response?.payload?.status) {
         NotifToastBerhasil(response?.payload?.message);
         localStorage.setItem(response?.payload?.data?.token, 'token');
@@ -79,7 +79,7 @@ export default function Login() {
                   </Link>
                 </div>
 
-                <Link href="/forgotpassword">
+                <Link href="/forgot/">
                   <span className="text-[#00ADB5] text-xs sm:text-sm capitalize font-medium">forgot password ?</span>
                 </Link>
               </div>

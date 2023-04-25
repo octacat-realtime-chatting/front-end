@@ -12,6 +12,10 @@ export const initialState = {
   dataAsyncLogin: null,
   loadingAsyncLogin: false,
   errorAsyncLogin: null,
+
+  dataAsyncForgot: null,
+  loadingAsyncForgot: false,
+  errorAsyncForgot: null,
 };
 
 export const asyncRegister = createAsyncThunk(
@@ -31,6 +35,14 @@ export const asyncLogin = createAsyncThunk(
   async ({ email, password }) => {
     const token = await userServices.login({ email, password });
     return token;
+  },
+);
+
+export const asyncForgot = createAsyncThunk(
+  'auth/asyncForgot',
+  async ({ email }) => {
+    const forgot = await userServices.sendEmail({ email });
+    return forgot;
   },
 );
 
@@ -60,6 +72,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: ({ addCase }) => {
+    // register
     addCase(asyncRegister.pending, (state) => {
       state.loadingAsyncRegister = true;
       state.errorAsyncRegister = null;
@@ -73,6 +86,7 @@ export const authSlice = createSlice({
       state.errorAsyncRegister = action.error;
     });
 
+    // login
     addCase(asyncLogin.pending, (state) => {
       state.loadingAsyncLogin = true;
     });
@@ -84,6 +98,19 @@ export const authSlice = createSlice({
     addCase(asyncLogin.rejected, (state, action) => {
       state.loadingAsyncLogin = false;
       state.errorAsyncLogin = action.error;
+    });
+
+    // forgot password
+    addCase(asyncForgot.pending, (state) => {
+      state.loadingAsyncForgot = true;
+    });
+    addCase(asyncForgot.fulfilled, (state, action) => {
+      state.loadingAsyncForgot = false;
+      state.dataAsyncForgot = action.payload;
+    });
+    addCase(asyncForgot.rejected, (state, action) => {
+      state.loadingAsyncForgot = false;
+      state.errorAsyncForgot = action.error;
     });
   },
 });
