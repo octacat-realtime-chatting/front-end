@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { RiChatSmile2Line, RiHome3Line, RiSettingsLine } from 'react-icons/ri';
 
-export const Sidebar = () => {
+export function Sidebar() {
   const router = useRouter();
 
   return (
@@ -54,4 +54,4 @@ export const Sidebar = () => {
       </div>
     </div>
   );
-};
+}

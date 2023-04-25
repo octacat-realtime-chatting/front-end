@@ -1,64 +1,29 @@
-import { NotifToastBerhasil, NotifToastGagal } from '@/components';
-import { asyncLogin, authState } from '@/redux/reducers/authSlices';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { BiLoaderCircle } from 'react-icons/bi';
-import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationLayout from '../layout/authenticationLayout';
+import { useLogin } from './hook/useLogin';
 
 export default function Login() {
-  const dispatch = useDispatch();
-  const { push } = useRouter();
-  const [visible, setVisible] = useState(false);
-  const { loadingAsyncLogin } = useSelector(authState);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const onSubmit = async (data, e) => {
-    e.preventDefault();
-
-    try {
-      const response = await dispatch(asyncLogin(data));
-
-      if (response?.payload?.status) {
-        NotifToastBerhasil(response?.payload?.message);
-        localStorage.setItem(response?.payload?.data?.token, 'token');
-
-        setTimeout(() => {
-          push('/home');
-        }, 1500);
-      }
-
-      if (!response?.payload?.status) {
-        NotifToastGagal(response?.error?.message);
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+  const { errors, loadingAsyncLogin, onSubmit, register, setVisible, visible } = useLogin();
 
   return (
     <AuthenticationLayout>
       <div className="flex items-center justify-center px-10 sm:px-36 pb-28 h-full">
-        <form className="flex flex-col gap-[25px] w-full" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col gap-[25px] w-full" onSubmit={onSubmit}>
           <div className="flex flex-col gap-[20px]">
             <span className="text-[#393E46] text-3xl uppercase dm-mono font-medium">login</span>
             <div className="flex flex-col gap-[15px]">
               <div className="flex flex-col gap-[25px]">
-                <input
-                  {...register('email')}
-                  type="email"
-                  className="dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
-                  placeholder="email"
-                />
+                <div className="min-w-full">
+                  <input
+                    {...register('email')}
+                    type="email"
+                    className="dm-sans border-2 w-full border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
+                    placeholder="email"
+                  />
+                  <p className="pt-4">{errors.email?.message}</p>
+                </div>
                 <div className="relative">
                   <input
                     {...register('password')}
@@ -66,6 +31,8 @@ export default function Login() {
                     className="w-full dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
                     placeholder="password"
                   />
+                  <p className="pt-4">{errors.password?.message}</p>
+
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
                     {visible ? (
                       <AiOutlineEyeInvisible size={20} color="#818489" />

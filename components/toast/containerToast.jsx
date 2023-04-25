@@ -1,8 +1,7 @@
-import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const ContainerToast = () => {
+export function ContainerToast() {
   return (
     <ToastContainer
       position="top-center"
@@ -17,4 +16,4 @@ export const ContainerToast = () => {
       theme="light"
     />
   );
-};
+}
