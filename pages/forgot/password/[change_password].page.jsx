@@ -1,10 +1,10 @@
+import { authState } from '@/redux/reducers/authSlices';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { BiLoaderCircle } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { authState } from '../../../redux/reducers/authSlices';
 import AuthenticationLayout from '../../layout/authenticationLayout';
 
 export default function ChangePassword() {
@@ -15,7 +15,10 @@ export default function ChangePassword() {
   const { loadingAsyncForgot } = useSelector(authState);
 
   const {
-    register, handleSubmit, formState: { errors }, reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (data) => console.log(data);
@@ -40,9 +43,11 @@ export default function ChangePassword() {
                     placeholder="password"
                   />
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
-                    {
-                      visible ? <AiOutlineEyeInvisible size={20} color="#818489" /> : <AiOutlineEye size={20} color="#818489" />
-                    }
+                    {visible ? (
+                      <AiOutlineEyeInvisible size={20} color="#818489" />
+                    ) : (
+                      <AiOutlineEye size={20} color="#818489" />
+                    )}
                   </button>
                 </div>
 
@@ -54,9 +59,11 @@ export default function ChangePassword() {
                     placeholder="password"
                   />
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
-                    {
-                      visible ? <AiOutlineEyeInvisible size={20} color="#818489" /> : <AiOutlineEye size={20} color="#818489" />
-                    }
+                    {visible ? (
+                      <AiOutlineEyeInvisible size={20} color="#818489" />
+                    ) : (
+                      <AiOutlineEye size={20} color="#818489" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -67,7 +74,7 @@ export default function ChangePassword() {
             type="submit"
             className="bg-[#00ADB5] uppercase text-base font-semibold dm-sans text-[#EEEEEE] py-2 rounded-[10px] shadow-login"
           >
-            { loadingAsyncForgot ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'change' }
+            {loadingAsyncForgot ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'change'}
           </button>
         </form>
       </div>

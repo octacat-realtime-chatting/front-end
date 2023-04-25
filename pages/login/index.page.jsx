@@ -1,13 +1,13 @@
+import { NotifToastBerhasil, NotifToastGagal } from '@/components';
+import { asyncLogin, authState } from '@/redux/reducers/authSlices';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
-import { BiLoaderCircle } from 'react-icons/bi';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { asyncLogin, authState } from '../../redux/reducers/authSlices';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { BiLoaderCircle } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationLayout from '../layout/authenticationLayout';
-import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -16,7 +16,10 @@ export default function Login() {
   const { loadingAsyncLogin } = useSelector(authState);
 
   const {
-    register, handleSubmit, formState: { errors }, reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data, e) => {
@@ -64,9 +67,11 @@ export default function Login() {
                     placeholder="password"
                   />
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
-                    {
-                      visible ? <AiOutlineEyeInvisible size={20} color="#818489" /> : <AiOutlineEye size={20} color="#818489" />
-                    }
+                    {visible ? (
+                      <AiOutlineEyeInvisible size={20} color="#818489" />
+                    ) : (
+                      <AiOutlineEye size={20} color="#818489" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -90,7 +95,7 @@ export default function Login() {
             type="submit"
             className="bg-[#00ADB5] uppercase text-base font-semibold dm-sans text-[#EEEEEE] py-2 rounded-[10px] shadow-login"
           >
-            { loadingAsyncLogin ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'sign in' }
+            {loadingAsyncLogin ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'sign in'}
           </button>
         </form>
       </div>

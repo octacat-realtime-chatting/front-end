@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { BiLoaderCircle } from 'react-icons/bi';
 import AuthenticationLayout from '../layout/authenticationLayout';
-import { asyncRegister, authState } from '../../redux/reducers/authSlices';
-import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
+import { asyncRegister, authState } from '@/redux/reducers/authSlices';
+import { NotifToastBerhasil, NotifToastGagal } from '@/components';
 
 export default function Register() {
   const dispatch = useDispatch();

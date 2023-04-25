@@ -1,5 +1,4 @@
-import React from 'react';
-import ContainerToast from '../../components/containerToast';
+import { ContainerToast } from '@/components';
 
 export default function AuthenticationLayout({ children }) {
   return (

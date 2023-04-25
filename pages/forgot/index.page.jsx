@@ -1,11 +1,8 @@
-import Link from 'next/link';
-import React from 'react';
+import { NotifToastBerhasil, NotifToastGagal } from '@/components';
+import { asyncForgot, authState } from '@/redux/reducers/authSlices';
 import { useForm } from 'react-hook-form';
 import { BiLoaderCircle } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { NotifToastBerhasil, NotifToastGagal } from '../../components/notify';
-import Paramcrypt from '../../lib/Paramcrypt';
-import { asyncForgot, authState } from '../../redux/reducers/authSlices';
 import AuthenticationLayout from '../layout/authenticationLayout';
 
 export default function SendEmail() {
@@ -13,7 +10,10 @@ export default function SendEmail() {
   const { loadingAsyncForgot } = useSelector(authState);
 
   const {
-    register, handleSubmit, formState: { errors }, reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data, e) => {
@@ -59,7 +59,7 @@ export default function SendEmail() {
             type="submit"
             className="bg-[#00ADB5] uppercase text-base font-semibold dm-sans text-[#EEEEEE] py-2 rounded-[10px] shadow-login"
           >
-            { loadingAsyncForgot ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'send' }
+            {loadingAsyncForgot ? <BiLoaderCircle size={20} className="mx-auto animate-spin h-5 w-5" /> : 'send'}
           </button>
         </form>
       </div>
