@@ -57,7 +57,9 @@ export default function Register() {
                     className="w-full dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
                     placeholder="password"
                   />
-                  <small className="text-xs text-red-600 capitalize">{errors.password?.message}</small>
+                  <small className="text-xs text-red-600 capitalize">
+                    {errors.password && <span>{errors.password.message}</span>}
+                  </small>
 
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
                     {visible ? <AiOutlineEyeInvisible size={20} color="#818489" /> : <AiOutlineEye size={20} color="#818489" />}
