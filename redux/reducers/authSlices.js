@@ -50,13 +50,11 @@ export const asyncForgot = createAsyncThunk(
   },
 );
 
-export const asyncChange = createAsyncThunk(
-  'auth/asyncChange',
-  async ( new_password, reset_token ) => {
-    const change = await userServices.changePassword( new_password, reset_token );
-    return change;
-  },
-);
+export const asyncChange = createAsyncThunk('auth/asyncChange', async (data) => {
+  const { new_password, reset_token } = data;
+  const change = await userServices.changePassword(new_password, reset_token);
+  return change;
+});
 
 export const authSlice = createSlice({
   name: 'auth',

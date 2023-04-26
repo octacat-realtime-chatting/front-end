@@ -45,7 +45,7 @@ export function Sidebar() {
           </Link>
         </div>
         <div className="absolute bottom-8 left-0 flex justify-center w-full">
-          <Image
+          <img
             src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt="profile"
             className="h-14 w-14 rounded-full object-cover border-4 border-[#00ADB5]"

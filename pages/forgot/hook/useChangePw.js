@@ -15,34 +15,39 @@ const schema = yup
 
 export const useChangePassword = () => {
     const dispatch = useDispatch();
-    const { query } = useRouter();
-    const { change_password } = query;
+    const router = useRouter();
+    const { change_password } = router.query;
     const reset_token = change_password;
     const [visible, setVisible] = useState(false);
     const { loadingAsyncChange } = useSelector(authState);
 
     const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
+      register,
+      handleSubmit,
+      formState: { errors },
+      reset,
     } = useForm({
-        resolver: yupResolver(schema),
+      resolver: yupResolver(schema),
     });
 
     const onSubmit = async (new_password) => {
-        try {
-            const response = await dispatch(asyncChange(new_password, reset_token));
-            if (response?.payload?.status) {
-                NotifToastBerhasil(response?.payload?.message);
-            }
-
-            if (!response?.payload?.status) {
-                NotifToastGagal(response?.error?.message);
-            }
-        } catch (error) {
-            throw new Error(error);
+      try {
+        const data = {
+          new_password,
+          reset_token,
+        };
+        const response = await dispatch(asyncChange(data));
+        if (response?.payload?.status) {
+          NotifToastBerhasil(response?.payload?.message);
+          router.push('/login');
         }
+
+        if (!response?.payload?.status) {
+          NotifToastGagal(response?.error?.message);
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
     };
 
     return {
