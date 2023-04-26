@@ -16,6 +16,10 @@ export const initialState = {
   dataAsyncForgot: null,
   loadingAsyncForgot: false,
   errorAsyncForgot: null,
+
+  dataAsyncChange: null,
+  loadingAsyncChange: false,
+  errorAsyncChange: null,
 };
 
 export const asyncRegister = createAsyncThunk(
@@ -43,6 +47,14 @@ export const asyncForgot = createAsyncThunk(
   async ({ email }) => {
     const forgot = await userServices.sendEmail({ email });
     return forgot;
+  },
+);
+
+export const asyncChange = createAsyncThunk(
+  'auth/asyncChange',
+  async ( new_password, reset_token ) => {
+    const change = await userServices.changePassword( new_password, reset_token );
+    return change;
   },
 );
 
@@ -111,6 +123,19 @@ export const authSlice = createSlice({
     addCase(asyncForgot.rejected, (state, action) => {
       state.loadingAsyncForgot = false;
       state.errorAsyncForgot = action.error;
+    });
+
+    // change password
+    addCase(asyncChange.pending, (state) => {
+      state.loadingAsyncChange = true;
+    });
+    addCase(asyncChange.fulfilled, (state, action) => {
+      state.loadingAsyncChange = false;
+      state.dataAsyncChange = action.payload;
+    });
+    addCase(asyncChange.rejected, (state, action) => {
+      state.loadingAsyncChange = false;
+      state.errorAsyncChange = action.error;
     });
   },
 });
