@@ -5,7 +5,7 @@ import { useChangePassword } from '../hook/useChangePw';
 
 export default function ChangePassword() {
   const { errors, loadingAsyncChange, onSubmit, register, setVisible, visible } = useChangePassword();
-  
+
   return (
     <AuthenticationLayout>
       <div className="flex items-center justify-center px-10 sm:px-36 pb-28 h-full">
@@ -25,8 +25,10 @@ export default function ChangePassword() {
                     className="w-full dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
                     placeholder="password"
                   />
-                  <small className="text-xs text-red-600 capitalize">{errors.new_password?.message}</small>
-                  
+                  <small className="text-xs text-red-600 capitalize">
+                    {errors.new_password && <span>{errors.new_password.message}</span>}
+                  </small>
+
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
                     {visible ? (
                       <AiOutlineEyeInvisible size={20} color="#818489" />
