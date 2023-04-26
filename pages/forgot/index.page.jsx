@@ -17,13 +17,15 @@ export default function SendEmail() {
 
             <div className="flex flex-col gap-[15px]">
               <div className="flex flex-col gap-[25px]">
-                <input
-                  {...register('email')}
-                  type="email"
-                  className="dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
-                  placeholder="email"
-                />
-                <p>{errors?.email?.message}</p>
+                <div className="flex flex-col gap-1">
+                  <input
+                    {...register('email')}
+                    type="email"
+                    className="dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
+                    placeholder="email"
+                  />
+                  <small className="text-xs text-red-600 capitalize">{errors.password?.message}</small>
+                </div>
               </div>
             </div>
           </div>

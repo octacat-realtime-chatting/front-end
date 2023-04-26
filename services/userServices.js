@@ -36,6 +36,16 @@ const userServices = {
 
     return { status, message, errors };
   },
+
+  changePassword: async (
+    new_password, reset_token,
+  ) => {
+    const { data: { status, message, errors } } = await apiServices.post('/auth/changepwd', {
+      new_password, reset_token,
+    });
+
+    return { status, message, errors };
+  }
 };
 
 export default userServices;

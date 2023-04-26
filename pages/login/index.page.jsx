@@ -14,24 +14,25 @@ export default function Login() {
           <div className="flex flex-col gap-[20px]">
             <span className="text-[#393E46] text-3xl uppercase dm-mono font-medium">login</span>
             <div className="flex flex-col gap-[15px]">
-              <div className="flex flex-col gap-[25px]">
-                <div className="min-w-full">
+              <div className="flex flex-col gap-[20px]">
+                <div className="min-w-full flex flex-col gap-1">
                   <input
                     {...register('email')}
                     type="email"
                     className="dm-sans border-2 w-full border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
                     placeholder="email"
                   />
-                  <p className="pt-4">{errors.email?.message}</p>
+                  <small className="text-xs text-red-600 capitalize">{errors.email?.message}</small>
                 </div>
-                <div className="relative">
+
+                <div className="relative flex flex-col gap-1">
                   <input
                     {...register('password')}
                     type={visible ? 'text' : 'password'}
                     className="w-full dm-sans border-2 border-[#A6A8AB] focus:outline-none bg-inherit rounded-[10px] py-2 px-2.5 text-sm font-normal placeholder:text-sm placeholder:text-[#818489] text-[#818489] placeholder:capitalize"
                     placeholder="password"
                   />
-                  <p className="pt-4">{errors.password?.message}</p>
+                  <small className="text-xs text-red-600 capitalize">{errors.password?.message}</small>
 
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
                     {visible ? (
