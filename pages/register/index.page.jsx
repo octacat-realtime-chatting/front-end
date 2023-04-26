@@ -62,7 +62,11 @@ export default function Register() {
                   </small>
 
                   <button type="button" className="absolute top-2.5 right-3" onClick={() => setVisible(!visible)}>
-                    {visible ? <AiOutlineEyeInvisible size={20} color="#818489" /> : <AiOutlineEye size={20} color="#818489" />}
+                    {visible ? (
+                      <AiOutlineEyeInvisible size={20} color="#818489" />
+                    ) : (
+                      <AiOutlineEye size={20} color="#818489" />
+                    )}
                   </button>
                 </div>
               </div>
